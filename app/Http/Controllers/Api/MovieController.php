@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Movie;
+use JWTAuth;
 
 class MovieController extends Controller
 {
@@ -15,7 +16,13 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Movie::all();
+        $user = JWTAuth::parseToken()->authenticate();
+        if ($user) {
+            return Movie::all();
+        }
+        else {
+            return;
+        }
     }
 
     /**
