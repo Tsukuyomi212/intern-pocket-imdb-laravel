@@ -24,4 +24,6 @@ Route::group([
     Route::post('register', 'Auth\RegisterController@register');
 });
 
-Route::apiResource('movies', 'Api\MovieController');///blaa
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('movies', 'Api\MovieController@index');
+});
