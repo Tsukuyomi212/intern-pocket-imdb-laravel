@@ -16,13 +16,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $user = JWTAuth::parseToken()->authenticate();
-        if ($user) {
             return Movie::all();
-        }
-        else {
-            return;
-        }
     }
 
     /**
