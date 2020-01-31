@@ -26,4 +26,5 @@ Route::group([
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('movies', 'Api\MovieController@index');
+    Route::get('movies/{id}', 'Api\MovieController@show');
 });
