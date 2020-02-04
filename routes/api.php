@@ -24,7 +24,9 @@ Route::group([
     Route::post('register', 'Auth\RegisterController@register');
 });
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('movies', 'Api\MovieController@index');
     Route::get('movies/{id}', 'Api\MovieController@show');
+    Route::get('genres', 'Api\GenresController@index');
+    Route::get('genres/{id}', 'Api\GenresController@show');
 });
