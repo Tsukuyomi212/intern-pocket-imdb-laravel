@@ -18,10 +18,10 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $title = $request->query('title');
-        if(!$title) {
-            return Movie::paginate(10);
+        if (!$title) {
+            return Movie::with('genre')->paginate(10);
         } else {
-            $movies = Movie::where('title', 'LIKE', "%$title%")->paginate(10);
+            $movies = Movie::with('genre')->paginate(10);
             return response()->json($movies);
         }
     }
@@ -45,7 +45,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie = Movie::findOrFail($id);
+        $movie = Movie::with('genre')->findOrFail($id);
         return $movie;
     }
 
