@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use App\Movie;
 use JWTAuth;
 
@@ -14,10 +15,15 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::paginate(10);
-        return response()->json($movies);
+        $title = $request->query('title');
+        if(!$title) {
+            return Movie::paginate(10);
+        } else {
+            $movies = Movie::where('title', 'LIKE', "%$title%")->paginate(10);
+            return response()->json($movies);
+        }
     }
 
     /**
