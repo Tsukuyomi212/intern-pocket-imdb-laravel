@@ -29,4 +29,5 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('movies/{id}', 'Api\MovieController@show');
     Route::get('genres', 'Api\GenresController@index');
     Route::get('genres/{id}', 'Api\GenresController@show');
+    Route::post('movies', 'Api\MovieController@store');
 });
