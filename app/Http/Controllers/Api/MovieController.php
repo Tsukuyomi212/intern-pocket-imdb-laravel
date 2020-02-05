@@ -21,7 +21,7 @@ class MovieController extends Controller
         if (!$title) {
             return Movie::with('genre')->paginate(10);
         } else {
-            $movies = Movie::with('genre')->paginate(10);
+            $movies = Movie::where('title', 'LIKE', "%$title%")->with('genre')->paginate(10);
             return response()->json($movies);
         }
     }
