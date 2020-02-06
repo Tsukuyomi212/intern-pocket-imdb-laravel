@@ -34,7 +34,19 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $movie = new Movie;
+        $movie->title = $request->title;
+        $movie->description = $request->description;
+        $movie->image_url = $request->image_url;
+        $movie->genre_id = $request->genre_id;
+        $movie->visits = 0;
+        $movie->likes = 0;
+        try {
+            $movie->save();
+            return $movie;
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
     }
 
     /**
